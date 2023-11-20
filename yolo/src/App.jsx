@@ -37,13 +37,25 @@ const App = () => {
     setValue(values.concat(-1))
   }
 
-  const calculateAverage = (props) => {
-      let totalSum = 0
-      values.forEach(element =>{
-        totalSum +=element
-      })
-      const average = totalSum / values.length
-      return average
+  const calculateAverage = () => {
+    let totalSum = 0
+    values.forEach(element =>{
+      totalSum +=element
+    })
+    const average = totalSum / values.length
+    return average
+  }
+
+  const calculatePositive = () => {
+    let totalSum = 0
+    values.forEach(element =>{
+      if (element === 1){
+        totalSum +=1
+      }
+      
+    })
+    const positivePercentage = 100* (totalSum / values.length)
+    return positivePercentage
   }
 
   return (
@@ -60,6 +72,7 @@ const App = () => {
       <div> bad {bad} </div>
       <div> all {all} </div>
       <div> average {calculateAverage()}</div>
+      <div> positive {calculatePositive()} % </div>
     </div>
   )
 }
