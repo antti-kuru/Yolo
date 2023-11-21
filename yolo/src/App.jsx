@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import './app.css'
 
-
-const Button = ({handleClick, text}) => {
+const Button = ({handleClick, text, className}) => {
   return(
-    <button onClick={handleClick}>{text}</button>
+    <button onClick={handleClick} className={className}>
+      {text}
+      </button>
   )
 }
 
@@ -23,7 +25,7 @@ const Statistics = ( {good, neutral, bad, all, values}) => {
       totalSum +=element
     })
     const average = totalSum / values.length
-    return average
+    return average.toFixed(2)
   }
 
   const calculatePositive = () => {
@@ -35,7 +37,7 @@ const Statistics = ( {good, neutral, bad, all, values}) => {
       
     })
     const positivePercentage = 100* (totalSum / values.length)
-    return positivePercentage
+    return positivePercentage.toFixed(1)
   }
 
   if (values.length === 0){
@@ -92,9 +94,9 @@ const App = () => {
   return (
     <div>
       <h1>Give feedback to YOLO</h1>
-      <Button handleClick={handleGoodClick} text='good'/>
-      <Button handleClick={handleNeutralClick} text='neutral' />
-      <Button handleClick={handleBadClick} text='bad' />
+      <Button handleClick={handleGoodClick} text='good' className='good'/>
+      <Button handleClick={handleNeutralClick} text='neutral' className='neutral' />
+      <Button handleClick={handleBadClick} text='bad' className='bad'/>
 
 
       <h2>statistics</h2>
