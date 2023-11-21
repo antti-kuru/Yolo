@@ -6637,3 +6637,15 @@ part1/node_modules/yocto-queue/index.js
 part1/node_modules/yocto-queue/license
 part1/node_modules/yocto-queue/package.json
 part1/node_modules/yocto-queue/readme.md
+part2/.eslintrc.cjs
+part2/.gitignore
+part2/index.html
+part2/package.json
+part2/README.md
+part2/vite.config.js
+part2/public/vite.svg
+part2/src/App.css
+part2/src/App.jsx
+part2/src/index.css
+part2/src/main.jsx
+part2/src/assets/react.svg

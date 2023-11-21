@@ -9,11 +9,10 @@ const Button = ({handleClick, text}) => {
 
 const StatisticLine = ({text, value}) => {
   return(
-    <div>
-      <div>
-        {text} {value}
-      </div>
-    </div>
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
   )
 }
 
@@ -46,13 +45,16 @@ const Statistics = ( {good, neutral, bad, all, values}) => {
   }
   return (
     <div>
-      <StatisticLine text="good" value={good} />
-      <StatisticLine text="neutral" value={neutral} />
-      <StatisticLine text="bad" value={bad} />
-      <StatisticLine text="all" value={all} />
-      <StatisticLine text="average" value={calculateAverage()} />
-      <StatisticLine text="positive" value={`${calculatePositive()} %`} />
-
+      <table>
+        <tbody>
+        <StatisticLine text="good" value={good} />
+        <StatisticLine text="neutral" value={neutral} />
+        <StatisticLine text="bad" value={bad} />
+        <StatisticLine text="all" value={all} />
+        <StatisticLine text="average" value={calculateAverage()} />
+        <StatisticLine text="positive" value={`${calculatePositive()} %`} />
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -86,7 +88,7 @@ const App = () => {
     setAll(all + 1)
     setValue(values.concat(-1))
   }
-  
+
   return (
     <div>
       <h1>Give feedback to YOLO</h1>
