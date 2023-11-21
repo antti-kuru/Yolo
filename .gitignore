@@ -6650,3 +6650,4 @@ part2/src/index.css
 part2/src/main.jsx
 part2/src/assets/react.svg
 part2/package-lock.json
+part2/src/components/Note.jsx
