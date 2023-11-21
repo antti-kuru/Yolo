@@ -8,6 +8,49 @@ const Button = ({handleClick, text}) => {
 }
 
 
+
+const Statistics = ( {good, neutral, bad, all, values}) => {
+  const calculateAverage = () => {
+    let totalSum = 0
+    values.forEach(element =>{
+      totalSum +=element
+    })
+    const average = totalSum / values.length
+    return average
+  }
+
+  const calculatePositive = () => {
+    let totalSum = 0
+    values.forEach(element =>{
+      if (element === 1){
+        totalSum +=1
+      }
+      
+    })
+    const positivePercentage = 100* (totalSum / values.length)
+    return positivePercentage
+  }
+
+  if (values.length === 0){
+    return (
+      <div>No feedback given</div>
+    )
+  }
+  return (
+    <div>
+       <div> good {good} </div>
+      <div> neutral {neutral} </div>
+      <div> bad {bad} </div>
+      <div> all {all} </div>
+      <div> average {calculateAverage()}</div>
+      <div> positive {calculatePositive()} % </div>
+    </div>
+  )
+  
+
+}
+
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -37,26 +80,7 @@ const App = () => {
     setValue(values.concat(-1))
   }
 
-  const calculateAverage = () => {
-    let totalSum = 0
-    values.forEach(element =>{
-      totalSum +=element
-    })
-    const average = totalSum / values.length
-    return average
-  }
 
-  const calculatePositive = () => {
-    let totalSum = 0
-    values.forEach(element =>{
-      if (element === 1){
-        totalSum +=1
-      }
-      
-    })
-    const positivePercentage = 100* (totalSum / values.length)
-    return positivePercentage
-  }
 
   return (
     <div>
@@ -67,12 +91,7 @@ const App = () => {
 
 
       <h2>statistics</h2>
-      <div> good {good} </div>
-      <div> neutral {neutral} </div>
-      <div> bad {bad} </div>
-      <div> all {all} </div>
-      <div> average {calculateAverage()}</div>
-      <div> positive {calculatePositive()} % </div>
+      <Statistics good={good} neutral={neutral} bad={bad} all={all} values={values}  />
     </div>
   )
 }
