@@ -7,7 +7,15 @@ const Button = ({handleClick, text}) => {
   )
 }
 
-
+const StatisticLine = ({text, value}) => {
+  return(
+    <div>
+      <div>
+        {text} {value}
+      </div>
+    </div>
+  )
+}
 
 const Statistics = ( {good, neutral, bad, all, values}) => {
   const calculateAverage = () => {
@@ -38,16 +46,15 @@ const Statistics = ( {good, neutral, bad, all, values}) => {
   }
   return (
     <div>
-       <div> good {good} </div>
-      <div> neutral {neutral} </div>
-      <div> bad {bad} </div>
-      <div> all {all} </div>
-      <div> average {calculateAverage()}</div>
-      <div> positive {calculatePositive()} % </div>
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="all" value={all} />
+      <StatisticLine text="average" value={calculateAverage()} />
+      <StatisticLine text="positive" value={`${calculatePositive()} %`} />
+
     </div>
   )
-  
-
 }
 
 
@@ -79,9 +86,7 @@ const App = () => {
     setAll(all + 1)
     setValue(values.concat(-1))
   }
-
-
-
+  
   return (
     <div>
       <h1>Give feedback to YOLO</h1>
