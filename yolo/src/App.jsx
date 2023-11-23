@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './app.css'
 import Button from './components/Button'
 import Statistics from './components/Statistics'
+import ProposalStatistics from './components/ProposalStatistics'
 
 const App = () => {
   // save clicks of each button to its own state
@@ -11,14 +12,20 @@ const App = () => {
   const [all, setAll] = useState(0)
   const [values, setValue] = useState([])
 
+  // save proposals list to its own state
   const [proposals, setProposals] = useState([])
   
   const [newProposal, setNewProposal] = useState('')
+  const [allProposals, setAllProposals] = useState(0)
 
   const handleGoodClick = () => {
+    // creating new variable for the update as the original can't be straight modified
     const updatedGood = good + 1
+    // setting the good value as the updated value
     setGood(updatedGood)
+    // increasing the total number of votes
     setAll(all + 1)
+    //adding new value to the list
     setValue(values.concat(1))
 
   }
@@ -35,18 +42,41 @@ const App = () => {
     setValue(values.concat(-1))
   }
 
-
-
   const addProposal = (event) => {
     event.preventDefault()
+    // creating new proposal object where the name is from user input and quantity is initialized as 1
     const proposalObject = {
-        name: newProposal
+        name: newProposal,
+        quantity: 1
     }
-    setProposals(proposals.concat(proposalObject))
+
+    // to prevent same proposals filling the list, have to check if the new value already exists in the list
+    const existingProposal = proposals.filter (proposal => proposal.name === newProposal)
+    if (existingProposal.length > 0){
+      // I need to create a copy from the original list because the original can't be straight modified
+      const updatedProposals = proposals.slice()
+      const updatedProposalIndex = updatedProposals.findIndex(proposal => proposal.name === newProposal)
+      // update the quantity of already existing proposal
+      updatedProposals[updatedProposalIndex].quantity += 1
+      // updating the proposals list
+      setProposals(updatedProposals)
+      // informing the user what happened
+      window.alert(newProposal + " already exist, added to quantity")
+      
+    }
+    else{
+      // adding the new proposal to the list
+      setProposals(proposals.concat(proposalObject))
+    }
+    // increasing total amount even when the printed list remains the same
+    setAllProposals(allProposals + 1)
+    setNewProposal('')
+    
   }
 
   const handleProposalChange = (event) => {
     console.log(event.target.value)
+    // from event.target.value we get the input the user has typed
     setNewProposal(event.target.value)
   }
 
@@ -57,7 +87,11 @@ const App = () => {
       <Button handleClick={handleNeutralClick} text='neutral' className='neutral' />
       <Button handleClick={handleBadClick} text='bad' className='bad'/>
       
-      <form onSubmit={addProposal}>
+      <h2>statistics</h2>
+      <Statistics good={good} neutral={neutral} bad={bad} all={all} values={values}  />
+
+
+      <form onSubmit={addProposal} >
         <div>
           proposal: <input value={newProposal} onChange={handleProposalChange} />
         </div>
@@ -66,16 +100,8 @@ const App = () => {
         </div>
       </form>
 
-      <h2>statistics</h2>
-      <Statistics good={good} neutral={neutral} bad={bad} all={all} values={values}  />
-
       <h3>proposed foods</h3>
-      <div>
-          {proposals.map(proposal =>
-            <li key={proposal.name}>
-              {proposal.name}</li> 
-            )}
-      </div>
+      <ProposalStatistics proposals={proposals} all={allProposals} />
     </div>
   )
 }
