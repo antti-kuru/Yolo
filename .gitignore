@@ -6666,3 +6666,6 @@ phonebook/public/vite.svg
 phonebook/src/App.jsx
 phonebook/src/main.jsx
 phonebook/src/assets/react.svg
+phonebook/src/components/Person.jsx
+phonebook/src/components/PersonForm.jsx
+phonebook/src/components/Persons.jsx

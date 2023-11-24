@@ -61,7 +61,7 @@ const App = () => {
       // updating the proposals list
       setProposals(updatedProposals)
       // informing the user what happened
-      window.alert(newProposal + " already exist, added to quantity")
+      window.alert(`${newProposal} is already in proposals, quantity updated`)
       
     }
     else{
