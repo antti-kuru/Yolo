@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import './app.css'
 import Button from './components/Button'
 import Statistics from './components/Statistics'
@@ -17,6 +18,20 @@ const App = () => {
   
   const [newProposal, setNewProposal] = useState('')
   const [allProposals, setAllProposals] = useState(0)
+
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3002/proposals')
+      .then(response => {
+        setProposals(response.data)
+      })
+  }, [])
+  console.log('render', proposals.length, 'proposals')
+
+
+
 
   const handleGoodClick = () => {
     // creating new variable for the update as the original can't be straight modified
@@ -93,7 +108,7 @@ const App = () => {
 
       <form onSubmit={addProposal} >
         <div>
-          proposal: <input value={newProposal} onChange={handleProposalChange} />
+          propose a food that you would like to eat here: <input value={newProposal} onChange={handleProposalChange} />
         </div>
         <div>
           <button type="submit">add</button>
