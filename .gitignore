@@ -6669,3 +6669,16 @@ phonebook/src/assets/react.svg
 phonebook/src/components/Person.jsx
 phonebook/src/components/PersonForm.jsx
 phonebook/src/components/Persons.jsx
+notes/.eslintrc.cjs
+notes/.gitignore
+notes/db.json
+notes/index.html
+notes/package-lock.json
+notes/package.json
+notes/README.md
+notes/vite.config.js
+notes/public/vite.svg
+notes/src/App.jsx
+notes/src/main.jsx
+notes/src/components/Note.jsx
+phonebook/db.json
