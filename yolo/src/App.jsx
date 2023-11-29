@@ -38,9 +38,7 @@ const App = () => {
     const updatedGood = good + 1
     // setting the good value as the updated value
     setGood(updatedGood)
-    // increasing the total number of votes
     setAll(all + 1)
-    //adding new value to the list
     setValue(values.concat(1))
 
   }
@@ -68,11 +66,11 @@ const App = () => {
     // to prevent same proposals filling the list, have to check if the new value already exists in the list
     const existingProposal = proposals.filter (proposal => proposal.name === newProposal)
     if (existingProposal.length > 0){
-      // I need to create a copy from the original list because the original can't be straight modified
-      const updatedProposals = proposals.slice()
-      const updatedProposalIndex = updatedProposals.findIndex(proposal => proposal.name === newProposal)
-      // update the quantity of already existing proposal
-      updatedProposals[updatedProposalIndex].quantity += 1
+      const updatedProposals = proposals.map(proposal => 
+        proposal.name === newProposal
+        ? {... proposal, quantity: proposal.quantity + 1}
+        : proposal
+        )
       // updating the proposals list
       setProposals(updatedProposals)
       // informing the user what happened
@@ -80,8 +78,11 @@ const App = () => {
       
     }
     else{
-      // adding the new proposal to the list
-      setProposals(proposals.concat(proposalObject))
+      axios
+        .post('http://localhost:3002/proposals', proposalObject)
+        .then(response => {
+          setProposals(proposals.concat(response.data))
+        })
     }
     // increasing total amount even when the printed list remains the same
     setAllProposals(allProposals + 1)
