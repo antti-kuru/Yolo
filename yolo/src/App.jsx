@@ -60,7 +60,8 @@ const App = () => {
     // creating new proposal object where the name is from user input and quantity is initialized as 1
     const proposalObject = {
         name: newProposal,
-        quantity: 1
+        quantity: 1,
+        id: proposals.length + 1,
     }
 
     // to prevent same proposals filling the list, have to check if the new value already exists in the list
@@ -81,6 +82,7 @@ const App = () => {
       axios
         .post('http://localhost:3002/proposals', proposalObject)
         .then(response => {
+          console.log(response)
           setProposals(proposals.concat(response.data))
         })
     }
