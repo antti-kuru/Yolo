@@ -61,7 +61,6 @@ const App = () => {
     const proposalObject = {
         name: newProposal,
         quantity: 1,
-        id: proposals.length + 1,
     }
 
     // to prevent same proposals filling the list, have to check if the new value already exists in the list

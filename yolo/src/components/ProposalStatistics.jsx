@@ -17,7 +17,7 @@ const ProposalStatistics = ({proposals, all}) => {
         </tr>
         {proposals.map(proposal =>
         
-         <StatisticLine key={proposal.name} text={proposal.name} value={proposal.quantity} />
+         <StatisticLine key={proposal.id} text={proposal.name} value={proposal.quantity} />
         )}
 
 
