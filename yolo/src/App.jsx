@@ -63,16 +63,14 @@ const App = () => {
         quantity: 1,
     }
 
-    // to prevent same proposals filling the list, have to check if the new value already exists in the list
-    const existingProposal = proposals.filter (proposal => proposal.name === newProposal)
-    if (existingProposal.length > 0){
-      const updatedProposals = proposals.map(proposal => 
-        proposal.name === newProposal
-        ? {... proposal, quantity: proposal.quantity + 1}
-        : proposal
-        )
-      // updating the proposals list
-      setProposals(updatedProposals)
+    const proposal = proposals.find(p => p.name === newProposal)
+    if (proposal){
+      const url = `http://localhost:3002/proposals/${proposal.id}`
+      const changedProposal = {... proposal, quantity: proposal.quantity + 1}
+
+      axios.put(url, changedProposal).then(response => {
+        setProposals(proposals.map(p => p.id !== proposal.id ? p : response.data))
+      })
       // informing the user what happened
       window.alert(`${newProposal} is already in proposals, quantity updated`)
       
