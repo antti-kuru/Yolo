@@ -6682,3 +6682,4 @@ notes/src/App.jsx
 notes/src/main.jsx
 notes/src/components/Note.jsx
 phonebook/db.json
+notes/src/services/notes.js
