@@ -2,13 +2,28 @@
   "proposals": [
     {
       "name": "nachopelti",
-      "quantity": 1,
+      "quantity": 2,
       "id": 1
     },
     {
       "name": "lasagne",
       "quantity": 2,
       "id": 2
+    },
+    {
+      "name": "kermaperunat",
+      "quantity": 1,
+      "id": 3
+    },
+    {
+      "name": "uunilohi",
+      "quantity": 1,
+      "id": 4
+    },
+    {
+      "name": "kebab",
+      "quantity": 1,
+      "id": 5
     }
   ]
 }
