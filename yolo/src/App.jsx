@@ -4,6 +4,7 @@ import './app.css'
 import Button from './components/Button'
 import Statistics from './components/Statistics'
 import ProposalStatistics from './components/ProposalStatistics'
+import proposalService from './services/proposals'
 
 const App = () => {
   // save clicks of each button to its own state
@@ -22,10 +23,10 @@ const App = () => {
 
   useEffect(() => {
     console.log('effect')
-    axios
-      .get('http://localhost:3002/proposals')
-      .then(response => {
-        setProposals(response.data)
+    proposalService
+      .getAll()
+      .then(initialProposals => {
+        setProposals(initialProposals)
       })
   }, [])
   console.log('render', proposals.length, 'proposals')
@@ -65,23 +66,23 @@ const App = () => {
 
     const proposal = proposals.find(p => p.name === newProposal)
     if (proposal){
-      const url = `http://localhost:3002/proposals/${proposal.id}`
       const changedProposal = {... proposal, quantity: proposal.quantity + 1}
-
-      axios.put(url, changedProposal).then(response => {
-        setProposals(proposals.map(p => p.id !== proposal.id ? p : response.data))
+      proposalService
+        .update(proposal.id, changedProposal)
+        .then(returnedProposal => {
+          setProposals(proposals.map(p => p.id !== proposal.id ? p : returnedProposal))
       })
       // informing the user what happened
       window.alert(`${newProposal} is already in proposals, quantity updated`)
       
     }
     else{
-      axios
-        .post('http://localhost:3002/proposals', proposalObject)
-        .then(response => {
-          console.log(response)
-          setProposals(proposals.concat(response.data))
-        })
+        proposalService
+          .create(proposalObject)
+          .then(createdProposal => {
+            console.log(createdProposal)
+            setProposals(proposals.concat(createdProposal))
+          })
     }
     // increasing total amount even when the printed list remains the same
     setAllProposals(allProposals + 1)
