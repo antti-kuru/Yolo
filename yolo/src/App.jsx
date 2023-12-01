@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import './app.css'
 import Button from './components/Button'
 import Statistics from './components/Statistics'
 import ProposalStatistics from './components/ProposalStatistics'
 import proposalService from './services/proposals'
-
+import Notification from './components/Notification'
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -20,6 +19,8 @@ const App = () => {
   const [newProposal, setNewProposal] = useState('')
   const [allProposals, setAllProposals] = useState(0)
 
+  const [notificationMessage, setNotification] = useState('')
+
 
   useEffect(() => {
     console.log('effect')
@@ -32,7 +33,16 @@ const App = () => {
   console.log('render', proposals.length, 'proposals')
 
 
+  const informingUser = (msg) => {
+    setNotification(
+      `${msg} thank you for answering!`
+    )
+    setTimeout(() => {
+      setNotification(null)
+    }, 4000)
 
+
+  }
 
   const handleGoodClick = () => {
     // creating new variable for the update as the original can't be straight modified
@@ -41,6 +51,7 @@ const App = () => {
     setGood(updatedGood)
     setAll(all + 1)
     setValue(values.concat(1))
+    informingUser(`Added feedback: good.`)
 
   }
   const handleNeutralClick = () => {
@@ -48,12 +59,14 @@ const App = () => {
     setNeutral(updatedNeutral)
     setAll(all + 1)
     setValue(values.concat(0))
+    informingUser(`Added feedback: neutral.`)
   }
   const handleBadClick = () => {
     const updatedBad = bad + 1
     setBad(updatedBad)
     setAll(all + 1)
     setValue(values.concat(-1))
+    informingUser(`Added feedback: bad.`)
   }
 
   const addProposal = (event) => {
@@ -71,9 +84,9 @@ const App = () => {
         .update(proposal.id, changedProposal)
         .then(returnedProposal => {
           setProposals(proposals.map(p => p.id !== proposal.id ? p : returnedProposal))
-      })
+        })
       // informing the user what happened
-      window.alert(`${newProposal} is already in proposals, quantity updated`)
+      informingUser(`${newProposal} is already in proposals, it's quantity updated.`)
       
     }
     else{
@@ -83,6 +96,9 @@ const App = () => {
             console.log(createdProposal)
             setProposals(proposals.concat(createdProposal))
           })
+          informingUser(`Added ${proposalObject.name}. `)
+          
+
     }
     // increasing total amount even when the printed list remains the same
     setAllProposals(allProposals + 1)
@@ -99,6 +115,7 @@ const App = () => {
   return (
     <div>
       <h1>Give feedback to YOLO</h1>
+      <Notification message={notificationMessage} />
       <Button handleClick={handleGoodClick} text='good' className='good'/>
       <Button handleClick={handleNeutralClick} text='neutral' className='neutral' />
       <Button handleClick={handleBadClick} text='bad' className='bad'/>
@@ -115,6 +132,7 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
+      
 
       <h3>proposed foods</h3>
       <ProposalStatistics proposals={proposals} all={allProposals} />
