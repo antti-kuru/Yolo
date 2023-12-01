@@ -6683,3 +6683,8 @@ notes/src/main.jsx
 notes/src/components/Note.jsx
 phonebook/db.json
 notes/src/services/notes.js
+notes/src/index.css
+notes/src/components/Footer.jsx
+notes/src/components/Notification.jsx
+phonebook/src/components/Notification.jsx
+phonebook/src/services/persons.js
