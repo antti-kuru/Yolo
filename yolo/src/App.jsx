@@ -129,7 +129,7 @@ const App = () => {
           propose a food that you would like to eat here: <input value={newProposal} onChange={handleProposalChange} />
         </div>
         <div>
-          <button type="submit">add</button>
+          <button className='addProposal' type="submit">add</button>
         </div>
       </form>
       

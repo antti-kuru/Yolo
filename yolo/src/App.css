@@ -5,6 +5,7 @@ body {
   
   h1 {
     color: #333;
+    font-style: italic;
   }
   
   button {
@@ -12,6 +13,7 @@ body {
     margin: 10px;
     cursor: pointer;
     border: none;
+    font-size: 25px;
   }
   
   button:hover {
@@ -20,6 +22,7 @@ body {
 
   button.good {
     background-color: #45a049;
+    color: white;
   }
   
   button.neutral {
@@ -28,6 +31,7 @@ body {
 
   button.bad {
     background-color: red;
+    color: white;
   }
 
   table {
@@ -53,5 +57,10 @@ body {
   div {
     margin-top: 10px;
   }
+  button.addProposal {
+    background-color: coral;
+    color: white;
+  }
+
   
   
