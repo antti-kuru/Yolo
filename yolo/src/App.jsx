@@ -99,7 +99,7 @@ const App = () => {
           setProposals(proposals.map(p => p.id !== proposal.id ? p : returnedProposal))
         })
       // informing the user what happened
-      informingUser(`${newProposal} is already in proposals, it's quantity updated.`)
+      informingUser(`${newProposal} is already in proposals, its quantity updated.`)
       
     }
     else if (!newProposal) {
