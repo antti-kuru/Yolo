@@ -5,6 +5,8 @@ import Statistics from './components/Statistics'
 import ProposalStatistics from './components/ProposalStatistics'
 import proposalService from './services/proposals'
 import Notification from './components/Notification'
+import Error from './components/Error'
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -20,6 +22,8 @@ const App = () => {
   const [allProposals, setAllProposals] = useState(0)
 
   const [notificationMessage, setNotification] = useState('')
+
+  const [errorMessage, setError] = useState('')
 
 
   useEffect(() => {
@@ -40,9 +44,18 @@ const App = () => {
     setTimeout(() => {
       setNotification(null)
     }, 4000)
-
-
   }
+
+  const informError = (msg) => {
+    setError(
+      `${msg}, no changes made`
+    )
+    setTimeout(() => {
+      setError(null)
+    }, 4000)
+  }
+
+
 
   const handleGoodClick = () => {
     // creating new variable for the update as the original can't be straight modified
@@ -89,6 +102,9 @@ const App = () => {
       informingUser(`${newProposal} is already in proposals, it's quantity updated.`)
       
     }
+    else if (!newProposal) {
+      informError(`Name missing`)
+    }
     else{
         proposalService
           .create(proposalObject)
@@ -116,6 +132,7 @@ const App = () => {
     <div>
       <h1>Give feedback to YOLO</h1>
       <Notification message={notificationMessage} />
+      <Error message={errorMessage} />
       <Button handleClick={handleGoodClick} text='good' className='good'/>
       <Button handleClick={handleNeutralClick} text='neutral' className='neutral' />
       <Button handleClick={handleBadClick} text='bad' className='bad'/>
