@@ -4,7 +4,4 @@ import axios from 'axios'
 
 import App from './App'
 
-axios.get('/api/proposals').then(response => {
-    const responses = response.data
-    ReactDOM.createRoot(document.getElementById('root')).render(<App responses={responses} />)
-})
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
