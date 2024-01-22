@@ -1,8 +1,7 @@
 
+https://github.com/antti-kuru/yolo_backend/assets/128390200/75413184-9caa-4293-8cfb-ab52aed66195
 
-
-https://github.com/antti-kuru/Yolo/assets/128390200/7ea638af-2798-4daf-9d89-087039238275
-
+Sorry for the multiple second delay at the start of the video, I have no clue why it happens
 
 
 This is the frontend repository of the project Yolo where customers can leave reviews of Yolo, known as extremely popular Ylioppilastalo student restaurant here in Lappeenranta. Project is build with React + Vite. 
